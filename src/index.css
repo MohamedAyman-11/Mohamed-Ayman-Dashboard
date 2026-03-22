@@ -1,0 +1,26 @@
+/* .drawer-scroll::-webkit-scrollbar {
+ display: none;
+} */
+
+/* width */
+.custom-scrollbar::-webkit-scrollbar {
+ display: block;
+ width: 12px;
+ border-radius: none;
+}
+
+/* Track */
+/* .custom-scrollbar::-webkit-scrollbar-track {
+ background: #f1f1f1;
+} */
+
+/* Handle */
+.custom-scrollbar::-webkit-scrollbar-thumb {
+ background: #afaeae;
+ border-radius: none;
+}
+
+/* Handle on hover */
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+ background: #777777;
+}
