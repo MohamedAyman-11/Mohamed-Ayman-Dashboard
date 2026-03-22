@@ -1,11 +1,12 @@
 import { createTheme, styled, ThemeProvider } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import type { PaletteMode } from "@mui/material/styles";
 import TopBar from "../components/AppBar";
 import SideBar from "../components/SideBar";
 import { Outlet } from "react-router-dom";
+import { getTheme } from "../utils";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -22,11 +23,7 @@ const RootLayout = () => {
     const savedMode = localStorage.getItem("currentMode");
     return savedMode === "dark" ? "dark" : "light";
   });
-  const darkTheme = createTheme({
-    palette: {
-      mode: mode,
-    },
-  });
+  const theme = useMemo(() => getTheme(mode), [mode]);
   /* ** Handlers ** */
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -35,7 +32,7 @@ const RootLayout = () => {
     setOpen(false);
   };
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={theme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <TopBar

@@ -94,7 +94,7 @@ const TopBar = ({ open, handleDrawerOpen, setMode }: IProps) => {
   };
   return (
     <>
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" open={open} color="primary" enableColorOnDark>
         <Toolbar>
           <IconButton
             color="inherit"
