@@ -12,7 +12,7 @@ export const getTheme = (mode: PaletteMode) =>
       },
 
       secondary: {
-        main: mode === "light" ? "#ec4899" : "#f472b6", 
+        main: mode === "light" ? "#787878" : "#c9c9c9", 
       },
 
       background: {

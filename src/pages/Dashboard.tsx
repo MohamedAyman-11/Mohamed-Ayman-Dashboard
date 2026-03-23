@@ -1,25 +1,18 @@
-import { Box, Grid } from "@mui/material";
-import UsersCard from "../components/UsersGender";
+import { Grid } from "@mui/material";
 import ProductsByCategoryChart from "../components/ProductChart";
+import GenderChart from "../components/UsersGender";
 
 const Dashboard = () => {
   return (
     <>
       <Grid container spacing={"20px"} mt={"30px"}>
-        <Grid size={{ xs: 12, md: 6, lg: 4, xl: 3 }}>
-          <UsersCard />
+        <Grid size={{ xs: 12, lg: 6, xl: 4 }}>
+          <GenderChart />
         </Grid>
-
-        <Grid size={{ xs: 12, md: 6, lg: 4, xl: 3 }}>
-          <UsersCard />
-        </Grid>
-        <Grid size={{ xs: 12, md: 6, lg: 4, xl: 3 }}>
-          <UsersCard />
+        <Grid size={{ xs: 12, lg: 6, xl: 8 }}>
+          <ProductsByCategoryChart />
         </Grid>
       </Grid>
-      <Box mt={"50px"}>
-        <ProductsByCategoryChart />
-      </Box>
     </>
   );
 };
