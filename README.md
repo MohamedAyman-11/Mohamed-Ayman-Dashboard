@@ -1,73 +1,114 @@
-# React + TypeScript + Vite
+Listed directory Mohamed-Ayman-Dashboard
+Viewed package.json:1-45
+Viewed index.html:1-16
+Listed directory src
+Listed directory pages
+Listed directory components
+Viewed App.tsx:1-13
+Created task.md
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Analyzed repository structure. Proceeding to read routing and main views.
 
-Currently, two official plugins are available:
+Viewed index.tsx:1-20
+Viewed Dashboard.tsx:1-33
+Edited task.md
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+# 📊 E-Commerce Admin Dashboard
 
-## React Compiler
+A modern, responsive React-based admin dashboard built to manage and visualize e-commerce platform data. This project provides an intuitive interface for tracking key metrics, managing users and products, and analyzing data through interactive charts and data grids.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- **Interactive Dashboard:** High-level summary cards for Customers, Products, and Categories.
+- **Data Visualization:** Insightful charts displaying user demographics (Gender Chart) and product distribution.
+- **Advanced Data Management:** Rich data grids for Customers and Products with built-in sorting and pagination.
+- **Responsive Layout:** A flexible UI with a collapsible Sidebar and adaptable App Bar for desktop and mobile viewing.
+- **Real-time Notifications:** Dedicated drawers for Messages and Notifications.
+- **Mock Data Generation:** Integrated with Faker.js to populate realistic test data seamlessly.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 💻 Tech Stack & Tools
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **Core:** [React 19](https://react.dev/), [TypeScript](https://www.typescriptlang.org/), [Vite](https://vitejs.dev/)
+- **UI Framework:** [Material UI (MUI) v7](https://mui.com/), Emotion
+- **Routing:** [React Router v7](https://reactrouter.com/)
+- **State Management & Fetching:** [TanStack React Query v5](https://tanstack.com/query/latest), Axios
+- **Data Visualization:** MUI X Charts, [Chart.js](https://www.chartjs.org/) & React-Chartjs-2
+- **Utilities:** Faker.js (mock data), React CountUp (number animations), ESLint
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🏗 System Architecture
+
+The project follows a modular, component-driven architecture:
+- **Routing Layer:** Centralized routing using React Router (`createBrowserRouter`), wrapped in a `RootLayout`.
+- **Pages / Views:** Divided into specific domains (`Dashboard`, `Customers`, `Products`).
+- **Components:** Reusable UI components including specific cards, charts, and data grids isolated from the business logic.
+- **Data Fetching:** Handled transparently by React Query hooks, separating data synchronization from UI rendering.
+
+## 🛠 Installation & Setup
+
+1. **Clone the repository:**
+   ```bash
+   git clone <repository-url>
+   cd Mohamed-Ayman-Dashboard
+   ```
+
+2. **Install dependencies:**
+   Using npm:
+   ```bash
+   npm install
+   ```
+   Or using Yarn:
+   ```bash
+   yarn install
+   ```
+
+## 🏃‍♂️ How to Run Locally
+
+Start the development server with Hot Module Replacement (HMR):
+
+```bash
+npm run dev
+# or
+yarn dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open your browser and navigate to `http://localhost:5173`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📖 Usage Guide
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **Dashboard Page (`/`):** View overall statistics, revenue summaries, user demographics, and product distribution charts.
+- **Products Page (`/Products`):** Access the complete inventory with detailed grid views.
+- **Customers Page (`/Customers`):** Manage customer data, contact info, and activity status.
+- **Drawers:** Click on the notification or message icons in the App Bar to open the respective right-side drawers.
+
+## 📁 Folder Structure
+
+```text
+src/
+├── assets/          # Static assets (images, icons)
+├── components/      # Reusable UI components (Sidebar, Charts, Cards, DataGrids)
+├── data/            # Mock data or static data constants
+├── interfaces/      # TypeScript interfaces/models
+├── pages/           # Route views (Dashboard, Customers, Products)
+├── types/           # Global type definitions
+├── utils/           # Helper functions and utilities
+├── App.tsx          # Main application entry component
+├── index.css        # Global styles
+└── main.tsx         # React DOM rendering
 ```
+
+## 🤝 Contribution Guidelines
+
+Contributions, issues, and feature requests are welcome!
+
+1. Fork the project.
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`).
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
+4. Push to the branch (`git push origin feature/AmazingFeature`).
+5. Open a Pull Request.
+
+## 📬 Contact / Author
+
+- **Author:** Mohamed Ayman
+- **GitHub:** [Your GitHub Profile](https://github.com/MohamedAyman-11)
+- **LinkedIn:** [Your LinkedIn Profile](https://www.linkedin.com/in/mohamedayman-dev/)
