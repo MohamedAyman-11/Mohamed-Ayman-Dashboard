@@ -8,7 +8,7 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import {
   Box,
   Card,
