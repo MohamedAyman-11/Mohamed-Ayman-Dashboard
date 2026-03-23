@@ -10,8 +10,8 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+import { LinksData } from "../data";
+import { useLocation, useNavigate } from "react-router-dom";
 const drawerWidth = 240;
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
@@ -70,6 +70,8 @@ interface IProps {
   handleDrawerClose: () => void;
 }
 const SideBar = ({ open, handleDrawerClose }: IProps) => {
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
   const theme = useTheme();
   return (
     <>
@@ -85,9 +87,22 @@ const SideBar = ({ open, handleDrawerClose }: IProps) => {
         </DrawerHeader>
         <Divider />
         <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: "block" }}>
+          {LinksData.map((link) => (
+            <ListItem
+              key={link.text}
+              disablePadding
+              sx={{
+                display: "block",
+                backgroundColor:
+                  pathname === link.path
+                    ? theme.palette.mode === "light"
+                      ? "#e8e8e8"
+                      : "#ffffff14"
+                    : "transparent",
+              }}
+            >
               <ListItemButton
+                onClick={() => navigate(link.path)}
                 sx={[
                   {
                     minHeight: 48,
@@ -117,62 +132,10 @@ const SideBar = ({ open, handleDrawerClose }: IProps) => {
                         },
                   ]}
                 >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  {link.icon}
                 </ListItemIcon>
                 <ListItemText
-                  primary={text}
-                  sx={[
-                    open
-                      ? {
-                          opacity: 1,
-                        }
-                      : {
-                          opacity: 0,
-                        },
-                  ]}
-                />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={[
-                  {
-                    minHeight: 48,
-                    px: 2.5,
-                  },
-                  open
-                    ? {
-                        justifyContent: "initial",
-                      }
-                    : {
-                        justifyContent: "center",
-                      },
-                ]}
-              >
-                <ListItemIcon
-                  sx={[
-                    {
-                      minWidth: 0,
-                      justifyContent: "center",
-                    },
-                    open
-                      ? {
-                          mr: 3,
-                        }
-                      : {
-                          mr: "auto",
-                        },
-                  ]}
-                >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText
-                  primary={text}
+                  primary={link.text}
                   sx={[
                     open
                       ? {

@@ -1,12 +1,8 @@
-/* .drawer-scroll::-webkit-scrollbar {
- display: none;
-} */
-
 /* width */
 .custom-scrollbar::-webkit-scrollbar {
  display: block;
  width: 12px;
- border-radius: none;
+ border-radius: 0;
 }
 
 /* Track */

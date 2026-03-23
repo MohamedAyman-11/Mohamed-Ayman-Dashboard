@@ -1,7 +1,9 @@
+import CustomersDataGrid from "../components/CustomersDataGrid";
+
 const Customers = () => {
   return (
     <>
-      <div>Customers</div>
+      <CustomersDataGrid />
     </>
   );
 };
