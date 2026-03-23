@@ -4,6 +4,7 @@ import type { GridColDef } from "@mui/x-data-grid";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
+/* ** What The Column Will Appear  ** */
 const columns: GridColDef[] = [
   {
     field: "image",
@@ -73,6 +74,7 @@ const columns: GridColDef[] = [
 ];
 
 const CustomersDataGrid = () => {
+  /* ** Fetching Data ** */
   const theme = useTheme();
   const { isLoading, data } = useQuery({
     queryKey: ["customers"],
