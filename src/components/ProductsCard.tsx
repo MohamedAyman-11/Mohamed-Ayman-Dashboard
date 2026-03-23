@@ -1,4 +1,4 @@
-import { Group, Inventory } from "@mui/icons-material";
+import { Inventory } from "@mui/icons-material";
 import {
   Avatar,
   Box,
