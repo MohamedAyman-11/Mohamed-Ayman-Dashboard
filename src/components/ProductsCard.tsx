@@ -1,4 +1,4 @@
-import { Group } from "@mui/icons-material";
+import { Group, Inventory } from "@mui/icons-material";
 import {
   Avatar,
   Box,
@@ -12,16 +12,16 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
-const CustomerCard = () => {
+const ProductsCard = () => {
   const theme = useTheme();
   const { isLoading, data } = useQuery({
-    queryKey: ["our-customer"],
+    queryKey: ["our-products"],
     queryFn: async () => {
       try {
         const { data } = await axios.get(
-          "https://dummyjson.com/users?limit=208",
+          "https://dummyjson.com/products?limit=194",
         );
-        return data.users;
+        return data.products;
       } catch (error) {
         console.log(error);
       }
@@ -241,17 +241,22 @@ const CustomerCard = () => {
           >
             <Avatar
               sx={{
-                bgcolor: theme.palette.info.light,
+                bgcolor: theme.palette.warning.light,
                 width: "65px",
                 height: "65px",
               }}
               variant="circular"
             >
-              <Group fontSize="large" sx={{ color: "#fff" }} />
+              <Inventory
+                fontSize="large"
+                sx={{
+                  color: "#fff",
+                }}
+              />
             </Avatar>
             <Stack direction={"column"} alignItems={"center"}>
               <Typography variant="h6" component={"span"} color="secondary">
-                Customers
+                Products
               </Typography>
               <Typography variant="h4" component={"h6"} mt={1}>
                 {data?.length}
@@ -263,4 +268,4 @@ const CustomerCard = () => {
     </>
   );
 };
-export default CustomerCard;
+export default ProductsCard;

@@ -8,9 +8,16 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+  type ChartData,
+} from "chart.js";
 ChartJS.register(ArcElement, Tooltip, Legend);
 import { Doughnut } from "react-chartjs-2";
+import { useEffect, useState } from "react";
 
 const GenderChart = () => {
   const theme = useTheme();
@@ -28,6 +35,30 @@ const GenderChart = () => {
       }
     },
   });
+  const [genderData, setGenderData] = useState<ChartData<"doughnut">>({
+    labels: [],
+    datasets: [],
+  });
+  useEffect(() => {
+    if (isLoading) return;
+    const maleCount = data.filter(
+      (u: { gender: string }) => u.gender === "male",
+    ).length;
+    const femaleCount = data.filter(
+      (u: { gender: string }) => u.gender === "female",
+    ).length;
+    setGenderData({
+      labels: ["Male", "Female"],
+      datasets: [
+        {
+          label: "Gender Count",
+          data: [maleCount, femaleCount],
+          backgroundColor: [theme.palette.primary.main, "#f35865"],
+          borderColor: "transparent",
+        },
+      ],
+    });
+  }, [data, theme.palette.primary.main]);
 
   if (isLoading)
     return (
@@ -214,55 +245,54 @@ const GenderChart = () => {
         </Typography>
       </Box>
     );
-
-  const maleCount = data.filter(
-    (u: { gender: string }) => u.gender === "male",
-  ).length;
-  const femaleCount = data.filter(
-    (u: { gender: string }) => u.gender === "female",
-  ).length;
   return (
-    <Card sx={{ borderRadius: 3, width: "95%", height: 400, mx: "auto" }}>
-      <CardContent sx={{ height: "100%" }}>
-        <Typography variant="h6" mb={2} align="center">
-          Gender Distribution
-        </Typography>
-        <Box
-          sx={{
-            height: "calc(100% - 40px)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Doughnut
-            width={"100%"}
-            options={{
-              plugins: {
-                legend: {
-                  labels: {
-                    color: theme.palette.text.primary,
-                    font: {
-                      size: 18,
-                    },
+    <Card
+      sx={{
+        borderRadius: 3,
+        width: "98%",
+        height: 400,
+        mx: "auto",
+      }}
+    >
+      <CardContent
+        sx={{
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Doughnut
+          width={"100%"}
+          options={{
+            animation: {
+              duration: 1500,
+              easing: "easeOutQuart",
+              delay: (ctx) => ctx.dataIndex * 200,
+            },
+            plugins: {
+              legend: {
+                labels: {
+                  color: theme.palette.text.primary,
+                  font: {
+                    size: 18,
                   },
                 },
               },
-              responsive: true,
-            }}
-            data={{
-              labels: ["Male", "Female"],
-              datasets: [
-                {
-                  label: "Count",
-                  data: [maleCount, femaleCount],
-                  backgroundColor: [theme.palette.primary.main, "#f35865"],
-                  borderColor: "transparent",
+              title: {
+                display: true,
+                text: "Gender Distribution",
+                color: theme.palette.text.primary,
+                font: {
+                  size: 20,
+                  weight: "bold",
                 },
-              ],
-            }}
-          />
-        </Box>
+              },
+            },
+            responsive: true,
+          }}
+          data={genderData}
+        />
       </CardContent>
     </Card>
   );

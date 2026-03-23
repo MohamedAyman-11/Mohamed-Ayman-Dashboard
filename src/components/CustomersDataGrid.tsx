@@ -37,15 +37,15 @@ const columns: GridColDef[] = [
     headerAlign: "center",
   },
   {
-    field: "age",
-    headerName: "Age",
+    field: "lastName",
+    headerName: "Last Name",
     align: "center",
     flex: 1,
     headerAlign: "center",
   },
   {
-    field: "lastName",
-    headerName: "Last Name",
+    field: "age",
+    headerName: "Age",
     align: "center",
     flex: 1,
     headerAlign: "center",
@@ -81,7 +81,7 @@ const CustomersDataGrid = () => {
     queryFn: async () => {
       try {
         const { data } = await axios.get(
-          "https://dummyjson.com/users?limit=208&select=firstName,age,password,lastName,username,gender,image",
+          "https://dummyjson.com/users?limit=208&select=firstName,lastName,age,password,username,gender,image",
         );
         return data.users;
       } catch (error) {

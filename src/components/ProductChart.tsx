@@ -7,8 +7,9 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import type { ChartData } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { useMemo } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   Card,
@@ -29,37 +30,48 @@ ChartJS.register(
   Legend,
 );
 
+type Product = {
+  category: string;
+};
+
 export default function ProductsByCategoryChart() {
   const theme = useTheme();
 
-  // ✅ fetch
-  const { isLoading, data } = useQuery({
-    queryKey: ["myProducts"],
+  const { data, isLoading } = useQuery<Product[]>({
+    queryKey: ["products"],
     queryFn: async () => {
-      try {
-        const { data } = await axios.get(
-          "https://dummyjson.com/products?limit=100",
-        );
-        return data.products;
-      } catch (error) {
-        console.log(error);
-      }
+      const res = await axios.get("https://dummyjson.com/products?limit=100");
+      return res.data.products;
     },
   });
 
-  /* ** Get The Products Category ** */
-  const categoryCount = useMemo(() => {
-    if (!data) return {};
+  const [chartData, setChartData] = useState<ChartData<"bar">>({
+    labels: [],
+    datasets: [],
+  });
+
+  useEffect(() => {
+    if (!data) return;
+
     const map: Record<string, number> = {};
-    data.forEach((product: { category: string }) => {
+
+    data.forEach((product) => {
       const cat = product.category;
       map[cat] = (map[cat] || 0) + 1;
     });
-    return map;
-  }, [data]);
-  /* ** Get Objects Keys ** */
-  const categories = Object.keys(categoryCount);
-  const values = Object.values(categoryCount);
+
+    setChartData({
+      labels: Object.keys(map),
+      datasets: [
+        {
+          label: "Number Of Products",
+          data: Object.values(map),
+          backgroundColor: theme.palette.primary.main,
+          borderRadius: 6,
+        },
+      ],
+    });
+  }, [data, theme.palette.primary.main]);
 
   if (isLoading)
     return (
@@ -246,53 +258,56 @@ export default function ProductsByCategoryChart() {
         </Typography>
       </Box>
     );
-  return (
-    <Card sx={{ borderRadius: 3, width: "95%", height: 400, mx: "auto" }}>
-      <CardContent sx={{ height: "100%" }}>
-        <Typography variant="h6" mb={2}>
-          Products per Category
-        </Typography>
-        <Box sx={{ height: "calc(100% - 40px)" }}>
-          <Bar
-            options={{
-              responsive: true,
-              maintainAspectRatio: false,
-              scales: {
-                x: {
-                  ticks: {
-                    color: theme.palette.text.primary,
-                  },
-                },
-                y: {
-                  ticks: {
-                    color: theme.palette.text.primary,
-                  },
-                },
-              },
 
-              plugins: {
-                legend: {
-                  labels: {
-                    color: theme.palette.text.primary,
-                    font: {
-                      size: 16,
-                    },
+  return (
+    <Card sx={{ borderRadius: 3, width: "98%", height: 400, mx: "auto" }}>
+      <CardContent sx={{ height: "100%" }}>
+        <Bar
+          data={chartData}
+          options={{
+            responsive: true,
+            maintainAspectRatio: false,
+
+            animation: {
+              duration: 1500,
+              easing: "easeOutQuart",
+              delay: (ctx) => ctx.dataIndex * 150,
+            },
+
+            scales: {
+              x: {
+                ticks: {
+                  color: theme.palette.text.primary,
+                },
+              },
+              y: {
+                ticks: {
+                  color: theme.palette.text.primary,
+                },
+              },
+            },
+
+            plugins: {
+              legend: {
+                labels: {
+                  color: theme.palette.text.primary,
+                  font: {
+                    size: 18,
                   },
                 },
               },
-            }}
-            data={{
-              labels: categories,
-              datasets: [
-                {
-                  label: "Number Of Products",
-                  data: values,
-                  backgroundColor: theme.palette.primary.main,
+              title: {
+                display: true,
+                text: "Products Per Category",
+                color: theme.palette.text.primary,
+                font: {
+                  size: 20,
+                  weight: "bold",
                 },
-              ],
-            }}
-          />
-        </Box>
+              },
+            },
+          }}
+        />
       </CardContent>
     </Card>
   );

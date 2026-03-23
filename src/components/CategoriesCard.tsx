@@ -1,4 +1,5 @@
-import { Group } from "@mui/icons-material";
+import { Inventory } from "@mui/icons-material";
+
 import {
   Avatar,
   Box,
@@ -12,21 +13,22 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
-const CustomerCard = () => {
+const CategoriesCard = () => {
   const theme = useTheme();
   const { isLoading, data } = useQuery({
-    queryKey: ["our-customer"],
+    queryKey: ["our-categories"],
     queryFn: async () => {
       try {
         const { data } = await axios.get(
-          "https://dummyjson.com/users?limit=208",
+          "https://dummyjson.com/products/category-list",
         );
-        return data.users;
+        return data;
       } catch (error) {
         console.log(error);
       }
     },
   });
+
   if (isLoading)
     return (
       <Box
@@ -220,6 +222,7 @@ const CustomerCard = () => {
             md: "fit-content",
             xs: "100%",
           },
+
           boxShadow: theme.palette.mode === "light" ? "0 0 3px #ccc" : "none",
           border: 0,
           px: 1.5,
@@ -231,30 +234,35 @@ const CustomerCard = () => {
           <Stack
             direction={"row"}
             alignItems={"center"}
-            gap={"20px"}
             sx={{
               justifyContent: {
                 xs: "center",
                 md: "flex-start",
               },
             }}
+            gap={"20px"}
           >
             <Avatar
               sx={{
-                bgcolor: theme.palette.info.light,
+                bgcolor: theme.palette.success.light,
                 width: "65px",
                 height: "65px",
               }}
               variant="circular"
             >
-              <Group fontSize="large" sx={{ color: "#fff" }} />
+              <Inventory
+                fontSize="large"
+                sx={{
+                  color: "#fff",
+                }}
+              />
             </Avatar>
             <Stack direction={"column"} alignItems={"center"}>
               <Typography variant="h6" component={"span"} color="secondary">
-                Customers
+                Categories
               </Typography>
-              <Typography variant="h4" component={"h6"} mt={1}>
-                {data?.length}
+              <Typography variant="h4" component={"div"} mt={1}>
+                +{data.length}
               </Typography>
             </Stack>
           </Stack>
@@ -263,4 +271,4 @@ const CustomerCard = () => {
     </>
   );
 };
-export default CustomerCard;
+export default CategoriesCard;

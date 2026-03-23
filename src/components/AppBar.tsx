@@ -114,7 +114,17 @@ const TopBar = ({ open, handleDrawerOpen, setMode }: IProps) => {
             <Tooltip title="My Profile Photo">
               <Avatar alt="Mohamed Ayman" src="/images/myPhoto.jpg" />
             </Tooltip>
-            <Typography variant="h5" noWrap component="h2">
+            <Typography
+              variant="h5"
+              noWrap
+              component="h2"
+              sx={{
+                display: {
+                  xs: "none",
+                  md: "initial",
+                },
+              }}
+            >
               Mohamed Ayman
             </Typography>
             <Stack direction={"row-reverse"} gap={"2px"}>
