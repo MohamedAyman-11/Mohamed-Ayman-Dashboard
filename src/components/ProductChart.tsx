@@ -57,12 +57,9 @@ export default function ProductsByCategoryChart() {
     });
     return map;
   }, [data]);
-
+  /* ** Get Objects Keys ** */
   const categories = Object.keys(categoryCount);
-
-  console.log("CATEGORIES", categories);
   const values = Object.values(categoryCount);
-  console.log("VALUES", values);
 
   if (isLoading)
     return (
@@ -255,13 +252,11 @@ export default function ProductsByCategoryChart() {
         <Typography variant="h6" mb={2}>
           Products per Category
         </Typography>
-
         <Box sx={{ height: "calc(100% - 40px)" }}>
           <Bar
             options={{
               responsive: true,
               maintainAspectRatio: false,
-
               scales: {
                 x: {
                   ticks: {

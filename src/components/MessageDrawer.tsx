@@ -122,7 +122,6 @@ const MessageDrawer = ({ open, toggleDrawer }: IProps) => {
         >
           <Clear />
         </IconButton>
-
         <Typography variant="h6" fontWeight={500}>
           Message
         </Typography>

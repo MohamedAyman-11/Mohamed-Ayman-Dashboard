@@ -257,7 +257,6 @@ const GenderChart = () => {
                   label: "Count",
                   data: [maleCount, femaleCount],
                   backgroundColor: [theme.palette.primary.main, "#f35865"],
-                  // borderAlign:
                   borderColor: "transparent",
                 },
               ],
