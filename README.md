@@ -110,5 +110,5 @@ Contributions, issues, and feature requests are welcome!
 ## 📬 Contact / Author
 
 - **Author:** Mohamed Ayman
-- **GitHub:** [Your GitHub Profile](https://github.com/MohamedAyman-11)
-- **LinkedIn:** [Your LinkedIn Profile](https://www.linkedin.com/in/mohamedayman-dev/)
+- **GitHub:** (https://github.com/MohamedAyman-11)
+- **LinkedIn:** (https://www.linkedin.com/in/mohamedayman-dev/)
