@@ -3,6 +3,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import type { GridColDef } from "@mui/x-data-grid";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { useEffect } from "react";
 
 /* ** What The Column Will Appear  ** */
 const columns: GridColDef[] = [
@@ -74,6 +75,9 @@ const columns: GridColDef[] = [
 ];
 
 const CustomersDataGrid = () => {
+  useEffect(() => {
+    document.title = "Dashboard | Customers-Data";
+  }, [])
   /* ** Fetching Data ** */
   const theme = useTheme();
   const { isLoading, data } = useQuery({
