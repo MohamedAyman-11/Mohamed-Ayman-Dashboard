@@ -1,7 +1,9 @@
+import ProductsDataGrid from "../components/ProductsDataGrid";
+
 const Products = () => {
   return (
     <>
-      <div>Orders</div>
+      <ProductsDataGrid />
     </>
   );
 };

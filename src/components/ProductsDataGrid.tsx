@@ -1,4 +1,12 @@
-import { Avatar, Box, SvgIcon, Typography, useTheme } from "@mui/material";
+import { Star } from "@mui/icons-material";
+import {
+  Avatar,
+  Box,
+  Rating,
+  SvgIcon,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import type { GridColDef } from "@mui/x-data-grid";
 import { useQuery } from "@tanstack/react-query";
@@ -7,8 +15,8 @@ import axios from "axios";
 /* ** What The Column Will Appear  ** */
 const columns: GridColDef[] = [
   {
-    field: "image",
-    headerName: "Profile Cover",
+    field: "thumbnail",
+    headerName: "Product Image",
     align: "center",
     flex: 1,
     headerAlign: "center",
@@ -16,8 +24,8 @@ const columns: GridColDef[] = [
       return (
         <Avatar
           sx={{ mx: "auto" }}
-          alt={`${data.row.firstName} ${data.row.lastName}`}
-          src={data.row.image}
+          alt={`${data.row.title} `}
+          src={data.row.thumbnail}
         />
       );
     },
@@ -30,60 +38,71 @@ const columns: GridColDef[] = [
     headerAlign: "center",
   },
   {
-    field: "firstName",
-    headerName: "First Name",
+    field: "title",
+    headerName: "Title",
     align: "center",
     flex: 1,
     headerAlign: "center",
   },
   {
-    field: "age",
-    headerName: "Age",
+    field: "price",
+    headerName: "Price",
     align: "center",
     flex: 1,
     headerAlign: "center",
   },
   {
-    field: "lastName",
-    headerName: "Last Name",
+    field: "discountPercentage",
+    headerName: "Discount Percentage",
     align: "center",
     flex: 1,
     headerAlign: "center",
   },
   {
-    field: "gender",
-    headerName: "Gender",
+    field: "stock",
+    headerName: "Stock",
     align: "center",
     flex: 1,
     headerAlign: "center",
   },
   {
-    field: "username",
-    headerName: "User Name",
+    field: "rating",
+    headerName: "Rating",
     align: "center",
     flex: 1,
     headerAlign: "center",
+    renderCell: (data) => {
+      return (
+        <Rating
+          name="text-feedback"
+          value={data.row.rating}
+          readOnly
+          precision={0.5}
+          emptyIcon={<Star style={{ opacity: 0.55 }} fontSize="inherit" />}
+        />
+      );
+    },
   },
   {
-    field: "password",
-    headerName: "Password",
+    field: "brand",
+    headerName: "Brand",
     align: "center",
     flex: 1,
     headerAlign: "center",
   },
 ];
 
-const CustomersDataGrid = () => {
+const ProductsDataGrid = () => {
   /* ** Fetching Data ** */
   const theme = useTheme();
   const { isLoading, data } = useQuery({
-    queryKey: ["customers"],
+    queryKey: ["products"],
     queryFn: async () => {
       try {
         const { data } = await axios.get(
-          "https://dummyjson.com/users?limit=208&select=firstName,age,password,lastName,username,gender,image",
+          "https://dummyjson.com/products?limit=194&select=title,price,discountPercentage,rating,stock,brand,thumbnail",
         );
-        return data.users;
+        return data.products;
       } catch (error) {
         console.log(error);
       }
@@ -284,7 +303,7 @@ const CustomersDataGrid = () => {
       }}
     >
       <Typography component={"h4"} variant="h4" mb={"20px"}>
-        Our customers
+        Products in store
       </Typography>
       <DataGrid
         rows={data}
@@ -296,4 +315,4 @@ const CustomersDataGrid = () => {
     </Box>
   );
 };
-export default CustomersDataGrid;
+export default ProductsDataGrid;

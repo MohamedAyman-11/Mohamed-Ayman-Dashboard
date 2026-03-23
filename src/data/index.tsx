@@ -1,4 +1,4 @@
-import { Dashboard, Group, Inventory, ShoppingBag } from "@mui/icons-material";
+import { Dashboard, Group, Inventory } from "@mui/icons-material";
 import type { ILinksData } from "../interfaces";
 
 export const LinksData: ILinksData[] = [
@@ -16,10 +16,5 @@ export const LinksData: ILinksData[] = [
     text: "Customers",
     path: "/customers",
     icon: <Group />,
-  },
-  {
-    text: "Orders",
-    path: "/orders",
-    icon: <ShoppingBag />,
   },
 ];
