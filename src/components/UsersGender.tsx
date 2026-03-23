@@ -23,7 +23,7 @@ const GenderChart = () => {
   const theme = useTheme();
   // ✅ fetch users
   const { isLoading, data } = useQuery({
-    queryKey: ["customers"],
+    queryKey: ["customers-gender"],
     queryFn: async () => {
       try {
         const { data } = await axios.get(

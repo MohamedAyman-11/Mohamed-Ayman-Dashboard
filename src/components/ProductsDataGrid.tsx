@@ -100,7 +100,7 @@ const ProductsDataGrid = () => {
   /* ** Fetching Data ** */
   const theme = useTheme();
   const { isLoading, data } = useQuery({
-    queryKey: ["products"],
+    queryKey: ["products-data"],
     queryFn: async () => {
       try {
         const { data } = await axios.get(
